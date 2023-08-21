@@ -247,14 +247,32 @@ import Cart from "./components/Cart";
 //   return ( <div> <h1> {customer.name} </h1> <h2> {customer.address.city} </h2> <button onClick={handleClick} >Change</button> </div> )
 // }
 
+// function App() {
+//   const[cartItems, setCartItems] = useState(['React', 'Angular', 'Vue']);
+//   return (
+//     <div>
+//         <NavBar cartItemsCount={cartItems.length} ></NavBar>
+//         <Cart cartItems={cartItems} onClear={() => setCartItems([]) } ></Cart>
+//     </div>
+//    )
+// }
+
 function App() {
-  const[cartItems, setCartItems] = useState(['React', 'Angular', 'Vue']);
-  return ( 
-    <div> 
-        <NavBar cartItemsCount={cartItems.length} ></NavBar> 
-        <Cart cartItems={cartItems} onClear={() => setCartItems([]) } ></Cart>
+  const [drink, setDrink] = useState({
+    title: "AMERICANO",
+    price: 100,
+  });
+  const handleClick = () => {
+    setDrink({ ...drink, price: drink.price + 10 });
+  };
+
+  return (
+    <div>
+      <h1> {drink.title} </h1>
+      <h2> {drink.price} </h2>
+      <button onClick={handleClick}>Change</button>
     </div>
-   )
+  );
 }
 
 export default App;
