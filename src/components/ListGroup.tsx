@@ -1,17 +1,12 @@
 import { useState } from "react";
 
+interface Props {
+  items: string[];
+  heading: string;
+}
+
 // import { Fragment } from "react";
-function listGroup() {
-  let items = [
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "Houston",
-    "Philadelphia",
-    "Phoenix",
-    "San Antonio",
-    "San Diego",
-  ];
+function ListGroup({items, heading}: Props) {
   // items = [];
   const getMessage = () => {
     return items.length === 0 ? "There are no items to display" : null;
@@ -27,7 +22,7 @@ function listGroup() {
 
   return (
     <>
-      <h1>List Group</h1>
+      <h1>{ heading }</h1>
       {items.length === 0 && <p>There are no items to display</p>}
       <ul className="list-group">
         {items.map((item, index) => (
@@ -49,4 +44,4 @@ function listGroup() {
   );
 }
 
-export default listGroup;
+export default ListGroup;
