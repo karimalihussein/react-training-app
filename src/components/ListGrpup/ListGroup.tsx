@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from './ListGroup.module.css';
+import styled from "styled-components";
 
 interface Props {
   items: string[];
