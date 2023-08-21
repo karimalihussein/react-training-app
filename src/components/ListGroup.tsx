@@ -3,10 +3,11 @@ import { useState } from "react";
 interface Props {
   items: string[];
   heading: string;
+  onSelectItem: (item: string) => void;
 }
 
 // import { Fragment } from "react";
-function ListGroup({items, heading}: Props) {
+function ListGroup({items, heading, onSelectItem}: Props) {
   // items = [];
   const getMessage = () => {
     return items.length === 0 ? "There are no items to display" : null;
@@ -30,7 +31,7 @@ function ListGroup({items, heading}: Props) {
             key={item}
             onClick={() => {
               setSelectedIndex(index);
-              console.log(index);
+              onSelectItem(item);
             }}
             className={`list-group-item ${
               index === selectedIndex ? "active" : ""
