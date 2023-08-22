@@ -26,18 +26,34 @@ function App() {
     const handleDelete = (user: User) => {
         const originalData = [...data];
         setData(data.filter((u) => u.id !== user.id));
-        axios.delete(`https://jsonplaceholder.typicode.com/xusers/${user.id}`).catch((error) => {
+        axios.delete(`https://jsonplaceholder.typicode.com/users/${user.id}`).catch((error) => {
             if (error instanceof CanceledError) return;
             if (error instanceof AxiosError) setError(error.message);
             setData(originalData);
         });
     }
+
+    const handleCreate = () => {
+        const originalData = [...data];
+        const user = { id: 0, name: "test" };
+        setData([user, ...data]);
+        axios.post<User>("https://jsonplaceholder.typicode.com/users", user).then((res) => {
+            const newUser = { ...res.data, id: Math.floor(Math.random() * 1000) };
+            setData([newUser, ...data]);
+        }).catch((error) => {
+            if (error instanceof CanceledError) return;
+            if (error instanceof AxiosError) setError(error.message);
+            setData(originalData);
+        });
+    };
+
     return (
         <div>
             {error && <p className="text-danger">{error}</p>}
             {loading && <div className="spinner-border">
                 <span className="visually-hidden">Loading...</span>
             </div>}
+            <button className="btn btn-primary mb-3" onClick={handleCreate}>Create</button>
             <h1>Users</h1>
             <ul className="list-group">
                 {data.map((user) => (
