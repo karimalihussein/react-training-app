@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosError, CanceledError } from "axios";
+import apiClient, { CanceledError, AxiosError } from "./components/services/api-client";
 
 interface User {
     id: number;
@@ -10,11 +10,10 @@ function App() {
     const [data, setData] = useState<User[]>([]);
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    // get -> promise -> then -> catch
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
-        axios.get<User[]>("https://jsonplaceholder.typicode.com/users", { signal: controller.signal })
+        apiClient.get<User[]>("/users", { signal: controller.signal })
             .then((res) => { setData(res.data); setLoading(false); })
             .catch((error) => {
                 if (error instanceof CanceledError) return;
@@ -26,7 +25,7 @@ function App() {
     const handleDelete = (user: User) => {
         const originalData = [...data];
         setData(data.filter((u) => u.id !== user.id));
-        axios.delete(`https://jsonplaceholder.typicode.com/users/${user.id}`).catch((error) => {
+        apiClient.delete(`/users/${user.id}`).catch((error) => {
             if (error instanceof CanceledError) return;
             if (error instanceof AxiosError) setError(error.message);
             setData(originalData);
@@ -37,7 +36,7 @@ function App() {
         const originalData = [...data];
         const user = { id: 0, name: "test" };
         setData([user, ...data]);
-        axios.post<User>("https://jsonplaceholder.typicode.com/users", user).then((res) => {
+        apiClient.post<User>("/users", user).then((res) => {
             const newUser = { ...res.data, id: Math.floor(Math.random() * 1000) };
             setData([newUser, ...data]);
         }).catch((error) => {
@@ -52,7 +51,7 @@ function App() {
         const index = data.indexOf(user);
         const updatedUser = { ...user, name: "updated" };
         setData([...data.slice(0, index), updatedUser, ...data.slice(index + 1)]);
-        axios.put<User>(`https://jsonplaceholder.typicode.com/users/${user.id}`, updatedUser).catch((error) => {
+        apiClient.put<User>(`/users/${user.id}`, updatedUser).catch((error) => {
             if (error instanceof CanceledError) return;
             if (error instanceof AxiosError) setError(error.message);
             setData(originalData);
