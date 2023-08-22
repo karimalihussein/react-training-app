@@ -8,6 +8,7 @@ import "./App.css";
 import produce from "immer";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
+import ExpandableText from "./components/ExpandableText";
 
 // function App() {
 //   let items = [
@@ -257,22 +258,32 @@ import Cart from "./components/Cart";
 //    )
 // }
 
-function App() {
-  const [drink, setDrink] = useState({
-    title: "AMERICANO",
-    price: 100,
-  });
-  const handleClick = () => {
-    setDrink({ ...drink, price: drink.price + 10 });
-  };
+// function App() {
+//   const [drink, setDrink] = useState({
+//     title: "AMERICANO",
+//     price: 100,
+//   });
+//   const handleClick = () => {
+//     setDrink({ ...drink, price: drink.price + 10 });
+//   };
 
-  return (
-    <div>
-      <h1> {drink.title} </h1>
-      <h2> {drink.price} </h2>
-      <button onClick={handleClick}>Change</button>
-    </div>
-  );
+//   return (
+//     <div>
+//       <h1> {drink.title} </h1>
+//       <h2> {drink.price} </h2>
+//       <button onClick={handleClick}>Change</button>
+//     </div>
+//   );
+// }
+
+
+function App() {
+    return (
+        <div> <ExpandableText>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut nihil vero! Labore saepe aut illum aspernatur vel dolor quas nostrum earum nesciunt, atque sunt tempore ex magni eos nisi.
+          </ExpandableText>  </div>
+    )
 }
+
 
 export default App;
