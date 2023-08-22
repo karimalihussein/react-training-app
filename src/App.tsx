@@ -1,6 +1,12 @@
 import { useState } from "react";
 import ExpenseList from "./components/tracker/components/ExpenseList";
 import ExpensesFilter from "./components/tracker/components/ExpensesFilter";
+import ExpenseForm from "./components/tracker/components/ExpenseForm";
+
+
+
+export const categories = ['Groceries', 'Utilities', 'Entertainment', 'Education'] as const;
+
 
 function App() {
     const [selectedCategory, setSelectedCategory] = useState('' as string);
@@ -22,12 +28,15 @@ function App() {
         <div className="container">
             <br />
             <div className="row">
-            <div className="mb-3">
-                <ExpensesFilter onSelectCategory={(category) => setSelectedCategory(category)} />
-            </div>
-            <div className="mb-3">
-                <ExpenseList expenses={filteredExpenses} onDelete={(id) => setExpenses(expenses.filter(e => e.id !== id))} />
-            </div>
+                <div className="mb-3">
+                    <ExpenseForm onSubmit={(expense) => setExpenses([...expenses, { ...expense, id: expenses.length + 1 }])} />
+                </div>
+                <div className="mb-3">
+                    <ExpensesFilter onSelectCategory={(category) => setSelectedCategory(category)} />
+                </div>
+                <div className="mb-3">
+                    <ExpenseList expenses={filteredExpenses} onDelete={(id) => setExpenses(expenses.filter(e => e.id !== id))} />
+                </div>
             </div>
         </div>
     )
