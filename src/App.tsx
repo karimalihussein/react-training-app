@@ -47,6 +47,18 @@ function App() {
         });
     };
 
+    const handleUpdate = (user: User) => {
+        const originalData = [...data];
+        const index = data.indexOf(user);
+        const updatedUser = { ...user, name: "updated" };
+        setData([...data.slice(0, index), updatedUser, ...data.slice(index + 1)]);
+        axios.put<User>(`https://jsonplaceholder.typicode.com/users/${user.id}`, updatedUser).catch((error) => {
+            if (error instanceof CanceledError) return;
+            if (error instanceof AxiosError) setError(error.message);
+            setData(originalData);
+        });
+    }
+
     return (
         <div>
             {error && <p className="text-danger">{error}</p>}
@@ -58,7 +70,10 @@ function App() {
             <ul className="list-group">
                 {data.map((user) => (
                     <li className="list-group-item d-flex justify-content-between"  key={user.id}>{user.name} {" "}
-                        <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(user)} >Delete</button>
+                        <div>
+                        <button className="btn btn-outline-danger btn-sm mx-1" onClick={() => handleDelete(user)} >Delete</button>
+                        <button className="btn btn-outline-primary btn-sm" onClick={() => handleUpdate(user)} >Edit</button>
+                        </div>
                     </li>
                 ))}
             </ul>
