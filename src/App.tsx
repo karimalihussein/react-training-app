@@ -4,11 +4,12 @@ import Alert from "./components/Alert";
 import Button from "./components/Button";
 import ListGroup from "./components/ListGrpup";
 import MessageComponent from "./components/Message";
-import "./App.css";
+// import "./App.css";
 import produce from "immer";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
 import ExpandableText from "./components/ExpandableText";
+import Form from "./components/Form";
 
 // function App() {
 //   let items = [
@@ -277,12 +278,16 @@ import ExpandableText from "./components/ExpandableText";
 // }
 
 
+// function App() {
+//     return (
+//         <div> <ExpandableText>
+//           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut nihil vero! Labore saepe aut illum aspernatur vel dolor quas nostrum earum nesciunt, atque sunt tempore ex magni eos nisi.
+//           </ExpandableText>  </div>
+//     )
+// }
+
 function App() {
-    return (
-        <div> <ExpandableText>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut nihil vero! Labore saepe aut illum aspernatur vel dolor quas nostrum earum nesciunt, atque sunt tempore ex magni eos nisi.
-          </ExpandableText>  </div>
-    )
+    return ( <div className="container"> <Form></Form> </div> )
 }
 
 
