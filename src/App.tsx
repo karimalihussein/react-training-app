@@ -1,23 +1,12 @@
 import { useEffect, useState } from "react";
-import apiClient, { CanceledError, AxiosError } from "./components/services/api-client";
-import userService, { User } from "./components/services/user-service";
+import apiClient, { CanceledError, AxiosError } from "./services/api-client";
+import userService, { User } from "./services/user-service";
+import useUsers from "./hooks/useUsers";
 
 function App() {
-    const [data, setData] = useState<User[]>([]);
-    const [error, setError] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
-    useEffect(() => {
-        const controller = new AbortController();
-        setLoading(true);
-          const { request, cancel } = userService.index();
-           request.then((res) => { setData(res.data); setLoading(false); })
-            .catch((error) => {
-                if (error instanceof CanceledError) return;
-                if (error instanceof AxiosError) setError(error.message);
-                setLoading(false);
-            });
-        return () => cancel();
-    }, []);
+
+    const { data, error, loading, setData, setError } = useUsers();
+
     const handleDelete = (user: User) => {
         const originalData = [...data];
         setData(data.filter((u) => u.id !== user.id));
