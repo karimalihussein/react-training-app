@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient, { CanceledError, AxiosError } from "./components/services/api-client";
-
-interface User {
-    id: number;
-    name: string;
-}
+import userService, { User } from "./components/services/user-service";
 
 function App() {
     const [data, setData] = useState<User[]>([]);
@@ -13,19 +9,19 @@ function App() {
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
-        apiClient.get<User[]>("/users", { signal: controller.signal })
-            .then((res) => { setData(res.data); setLoading(false); })
+          const { request, cancel } = userService.index();
+           request.then((res) => { setData(res.data); setLoading(false); })
             .catch((error) => {
                 if (error instanceof CanceledError) return;
                 if (error instanceof AxiosError) setError(error.message);
                 setLoading(false);
             });
-        return () => controller.abort();
+        return () => cancel();
     }, []);
     const handleDelete = (user: User) => {
         const originalData = [...data];
         setData(data.filter((u) => u.id !== user.id));
-        apiClient.delete(`/users/${user.id}`).catch((error) => {
+        userService.delete(user.id).catch((error) => {
             if (error instanceof CanceledError) return;
             if (error instanceof AxiosError) setError(error.message);
             setData(originalData);
@@ -36,10 +32,7 @@ function App() {
         const originalData = [...data];
         const user = { id: 0, name: "test" };
         setData([user, ...data]);
-        apiClient.post<User>("/users", user).then((res) => {
-            const newUser = { ...res.data, id: Math.floor(Math.random() * 1000) };
-            setData([newUser, ...data]);
-        }).catch((error) => {
+        userService.store(user).then((res) => { const newUser = { ...res.data, id: Math.floor(Math.random() * 1000) }; setData([newUser, ...data]); }).catch((error) => {
             if (error instanceof CanceledError) return;
             if (error instanceof AxiosError) setError(error.message);
             setData(originalData);
@@ -51,7 +44,7 @@ function App() {
         const index = data.indexOf(user);
         const updatedUser = { ...user, name: "updated" };
         setData([...data.slice(0, index), updatedUser, ...data.slice(index + 1)]);
-        apiClient.put<User>(`/users/${user.id}`, updatedUser).catch((error) => {
+        userService.update(updatedUser).catch((error) => {
             if (error instanceof CanceledError) return;
             if (error instanceof AxiosError) setError(error.message);
             setData(originalData);
