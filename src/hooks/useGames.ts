@@ -1,51 +1,23 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/ApiClient";
-import { CanceledError } from "axios";
+import useData from "./useData";
 
-export interface Platform {
+export interface IPlatform {
     id: number;
     name: string;
     slug: string;
     icon: string;
 }
 
-export interface Game {
+export interface IGame {
   id: number;
   name: string;
   slug: string;
   released: string;
   tba: boolean;
   background_image: string;
-  parent_platforms: { platform: Platform }[];
+  parent_platforms: { platform: IPlatform }[];
   metacritic: number;
 }
 
-interface FetchGamesResponse {
-  count: number;
-  results: Game[];
-}
-
-const useGames = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    const controller = new AbortController();
-    apiClient
-      .get<FetchGamesResponse>("/games", { signal: controller.signal })
-      .then((response) => {
-        setGames(response.data.results);
-        setLoading(false);
-      })
-      .catch((error) => {
-        if(error instanceof CanceledError) return;
-        setError(error.message);
-        setLoading(false);
-      });
-    return () => controller.abort();
-  }, []);
-  return { games, error, loading };
-};
+const useGames = () => useData<IGame>("/games");
 
 export default useGames;
