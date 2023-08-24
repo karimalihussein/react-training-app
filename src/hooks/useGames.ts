@@ -18,6 +18,6 @@ export interface IGame {
   metacritic: number;
 }
 
-const useGames = () => useData<IGame>("/games");
+const useGames = (selectedGenre: IGame | null) => useData<IGame>("/games", { params: { genres: selectedGenre?.id } }, [selectedGenre?.id]);
 
 export default useGames;

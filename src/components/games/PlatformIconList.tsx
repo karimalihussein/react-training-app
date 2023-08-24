@@ -10,7 +10,6 @@ import {
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import { Game, Platform } from "../../hooks/useGames";
 import {
   FaWindows,
   FaPlaystation,
@@ -20,9 +19,10 @@ import {
   FaAndroid,
 } from "react-icons/fa";
 import { IconType } from "react-icons";
+import { IPlatform } from "../../hooks/useGames";
 
 interface Props {
-  platforms: Platform[];
+  platforms: IPlatform[];
 }
 
 const PlatformIconList = ({ platforms }: Props) => {
