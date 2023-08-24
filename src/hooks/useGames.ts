@@ -34,12 +34,15 @@ const useGames = () => {
     const controller = new AbortController();
     apiClient
       .get<FetchGamesResponse>("/games", { signal: controller.signal })
-      .then((response) => setGames(response.data.results))
+      .then((response) => {
+        setGames(response.data.results);
+        setLoading(false);
+      })
       .catch((error) => {
         if(error instanceof CanceledError) return;
         setError(error.message);
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
     return () => controller.abort();
   }, []);
   return { games, error, loading };
