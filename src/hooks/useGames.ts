@@ -1,3 +1,4 @@
+import { IGameQuery } from "../App";
 import useData from "./useData";
 import { IGenre } from "./useGenres";
 import { IPlatform } from "./usePlatforms";
@@ -18,15 +19,16 @@ export interface IGame {
   background_image: string;
   parent_platforms: { platform: IPlatformGames }[];
   metacritic: number;
+  genres: IGenre[];
+
 }
 
 const useGames = (
-  selectedGenre: IGenre | null,
-  selectedPlatForm: IPlatform | null
+  gameQuery: IGameQuery
 ) =>
   useData<IGame>(
     "/games",
-    { params: { genres: selectedGenre?.id, platforms: selectedPlatForm?.id } },
-    [selectedGenre?.id, selectedPlatForm?.id]
+    { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id } },
+    [gameQuery]
   );
 export default useGames;

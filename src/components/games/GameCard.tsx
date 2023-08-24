@@ -3,6 +3,7 @@ import { IGame } from "../../hooks/useGames"
 import PlatformIconList from "./PlatformIconList"
 import CriticScore from "./CriticScore"
 import getCroppedImageUrl from "../../services/ImageUrl"
+import GenreShow from "./GenreShow"
 
 interface Props {
     game: IGame

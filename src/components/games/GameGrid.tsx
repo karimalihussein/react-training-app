@@ -5,15 +5,15 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { IGenre } from "../../hooks/useGenres";
 import { IPlatform } from "../../hooks/usePlatforms";
+import { IGameQuery } from "../../App";
 
 
 interface IGameGridProps {
-  selectedGenre: IGenre | null;
-  selectedPlatForm: IPlatform | null;
+  gameQuery: IGameQuery;
 }
 
-export const GameGrid = ({ selectedGenre, selectedPlatForm }: IGameGridProps) => {
-  const { data, loading, error } = useGames(selectedGenre, selectedPlatForm);
+export const GameGrid = ({ gameQuery }: IGameGridProps) => {
+  const { data, loading, error } = useGames(gameQuery);
   const skeletions = [1, 2, 3, 4, 5, 6];
   return (
     <div>
