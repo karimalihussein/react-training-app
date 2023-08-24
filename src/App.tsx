@@ -13,6 +13,7 @@ export interface IGameQuery {
   genre: IGenre | null;
   platform: IPlatform | null;
   sortOrder: string;
+  searchText: string;
 }
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
   return (
     <Grid templateAreas={templateAreas} templateColumns={templateColumns}>
 
-      <GridItem gridArea="nva"> <NavBar /> </GridItem>
+      <GridItem gridArea="nva"> <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText})} /> </GridItem>
 
       <Show above="lg">
           <GridItem gridArea="aside" paddingX={5}>
