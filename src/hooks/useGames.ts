@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/ApiClient";
 import { CanceledError } from "axios";
 
-interface Game {
+export interface Game {
   id: number;
   name: string;
   slug: string;
