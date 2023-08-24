@@ -7,11 +7,11 @@ import { IGenre } from "../../hooks/useGenres";
 
 
 interface Props {
-  selectedGenreProp: IGenre | null;
+  selectedGenre: IGenre | null;
 }
 
-export const GameGrid = ({ selectedGenreProp }: Props) => {
-  const { data, loading, error } = useGames(selectedGenreProp);
+export const GameGrid = ({ selectedGenre }: Props) => {
+  const { data, loading, error } = useGames(selectedGenre);
   const skeletions = [1, 2, 3, 4, 5, 6];
   return (
     <div>

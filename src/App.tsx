@@ -6,9 +6,7 @@ import GenreList from "./components/games/GenreList";
 import { IGame } from "./hooks/useGames";
 import { IGenre } from "./hooks/useGenres";
 function App() {
-  const [selectedGenree, setSelectedGenre] = useState<IGenre | null>(null);
-
-
+  const [selectedGenre, setSelectedGenre] = useState<IGenre | null>(null);
   return (
     <Grid
       templateAreas={{
@@ -25,11 +23,11 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem gridArea="aside" paddingX={5}>
-          <GenreList onSelectGenre={(genre) => setSelectedGenre(selectedGenree)} />
+          <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
         </GridItem>
       </Show>
       <GridItem gridArea="main">
-        <GameGrid selectedGenreProp={selectedGenree} />
+        <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );
