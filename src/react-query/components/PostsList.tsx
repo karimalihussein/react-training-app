@@ -2,22 +2,16 @@ import { useState } from "react";
 import usePosts from "../hooks/usePosts";
 
 const PostsList = () => {
-  const [userId, setUserId] = useState<number>();
-  const { data, error, isLoading } = usePosts(userId);
+  const limit = 10;
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading } = usePosts({
+    page,
+    limit,
+  });
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
   return (
     <>
-      <select
-        className="form-select mb-3"
-        onChange={(event) => setUserId(parseInt(event.target.value))}
-        value={userId}
-      >
-        <option>All</option>
-        <option value={1}>User 1</option>
-        <option value={2}>User 2</option>
-        <option value={3}>User 3</option>
-      </select>
       <ul className="list-group">
         {data?.map((post) => (
           <li className="list-group-item" key={post.id}>
@@ -25,6 +19,14 @@ const PostsList = () => {
           </li>
         ))}
       </ul>
+      <div className="d-flex justify-content-between">
+        <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+          Prev
+        </button>
+        <button className="btn btn-primary" onClick={() => setPage(page + 1)}>
+          Next
+        </button>
+      </div>
     </>
   );
 };
