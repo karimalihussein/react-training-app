@@ -13,6 +13,8 @@ const TodoForm = () => {
             // queryClient.invalidateQueries({ queryKey: 'todos' });
             // APPROACH 2: Update the data locally
             queryClient.setQueryData<ITodo[]>(['todos'], todos => [savedTodo, ...(todos|| [])]);
+            // Reset the input
+            ref.current!.value = '';
         }
     });
     return (
@@ -31,7 +33,9 @@ const TodoForm = () => {
                 <input type="text" className='form-control' ref={ref} />
             </div>
             <div className="col">
-                <button className='btn btn-primary'>Add Todo</button>
+                <button className='btn btn-primary' disabled={addTodo.isLoading} >
+                    { addTodo.isLoading ? 'Saving...' : 'Add Todo' }
+                </button>
             </div>
         </form>
     )
