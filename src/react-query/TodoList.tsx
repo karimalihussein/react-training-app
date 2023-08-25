@@ -11,9 +11,10 @@ interface ITodo {
 
 const TodoList = () => {
     const fetchTodos = () => axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos').then((res) => res.data);
-    const { data, error } = useQuery<ITodo[], Error >({queryKey: ['todos'], queryFn: fetchTodos});
+    const { data, error, isLoading } = useQuery<ITodo[], Error >({queryKey: ['todos'], queryFn: fetchTodos});
 
-    if(error) return <p>{ error.message }</p>
+    if(isLoading) return <p>Loading...</p>;
+    if(error) return <p>{ error.message }</p>;
 
     return (
         <ul className="list-group">
