@@ -2,13 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { IGameQuery } from "../App";
 import { IGenre } from "./useGenres";
 import apiClient, { IFetchResponse } from "../services/ApiClient";
-
-export interface IPlatformGames {
-  id: number;
-  name: string;
-  slug: string;
-  icon: string;
-}
+import { IPlatform } from "./usePlatforms";
 
 export interface IGame {
   id: number;
@@ -17,7 +11,7 @@ export interface IGame {
   released: string;
   tba: boolean;
   background_image: string;
-  parent_platforms: { platform: IPlatformGames }[];
+  parent_platforms: { platform: IPlatform }[];
   metacritic: number;
   genres: IGenre[];
 }

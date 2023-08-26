@@ -19,10 +19,10 @@ import {
   FaAndroid,
 } from "react-icons/fa";
 import { IconType } from "react-icons";
-import { IPlatformGames } from "../../hooks/useGames";
+import { IPlatform } from "../../hooks/usePlatforms";
 
 interface Props {
-  platforms: IPlatformGames[];
+  platforms: IPlatform[];
 }
 
 const PlatformIconList = ({ platforms }: Props) => {
