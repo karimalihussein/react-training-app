@@ -1,21 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useRef } from 'react'
-import { ITodo } from '../hooks/useTodos';
-import axios from 'axios';
+import { useRef } from 'react'
+import useAddTodo from '../hooks/useAddTodo';
 
 const TodoForm = () => {
     const ref = useRef<HTMLInputElement>(null);
-    const queryClient = useQueryClient();
-    const addTodo = useMutation({
-        mutationFn: (todo: ITodo) => axios.post<ITodo>('https://jsonplaceholder.typicode.com/todos', todo).then((res) => res.data).catch((err) => { throw err }),
-        onSuccess: (savedTodo, newTodo) => {
-            // APPROACH 1: Refetch the data
-            // queryClient.invalidateQueries({ queryKey: 'todos' });
-            // APPROACH 2: Update the data locally
-            queryClient.setQueryData<ITodo[]>(['todos'], todos => [savedTodo, ...(todos|| [])]);
-            // Reset the input
-            ref.current!.value = '';
-        }
+    const addTodo = useAddTodo(() => {
+        ref.current!.value = '';
     });
     return (
         <form className='row mb-3' onSubmit={(event) => {

@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { CACHE_KEY_TODOS } from '../constants';
+import ApiClient from '../services/ApiClient';
+
+const apiClient = new ApiClient<ITodo[]>('/todos');
 
 export interface ITodo {
     userId: number;
@@ -9,8 +12,7 @@ export interface ITodo {
 }
 
 const useTodos = () => {
-    const fetchTodos = () => axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos').then((res) => res.data);
-    return useQuery<ITodo[], Error >({queryKey: ['todos'], queryFn: fetchTodos});
+    return useQuery<ITodo[], Error>({ queryKey: CACHE_KEY_TODOS, queryFn: apiClient.getAll, staleTime: 10 * 1000 });
 };
 
 export default useTodos;
