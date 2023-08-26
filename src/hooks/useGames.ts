@@ -1,10 +1,10 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { IGameQuery } from "../App";
-import { IGenre } from "./useGenres";
-import APIClient, { IFetchResponse } from "../services/ApiClient";
-import { IPlatform } from "./usePlatforms";
-
-const apiClient = new APIClient<IGame>("/games");
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { IGameQuery } from '../App';
+import { IGenre } from './useGenres';
+import APIClient, { IFetchResponse } from '../services/ApiClient';
+import { IPlatform } from './usePlatforms';
+import ms from 'ms';
+const apiClient = new APIClient<IGame>('/games');
 
 export interface IGame {
   id: number;
@@ -20,7 +20,7 @@ export interface IGame {
 
 const useGames = (gameQuery: IGameQuery) =>
   useInfiniteQuery<IFetchResponse<IGame>, Error>({
-    queryKey: ["games", gameQuery],
+    queryKey: ['games', gameQuery],
     queryFn: ({ pageParam = 1 }) => apiClient.get({ 
       params: {
         genres: gameQuery.genreId,
@@ -32,7 +32,8 @@ const useGames = (gameQuery: IGameQuery) =>
      }),
     getNextPageParam: (lastPage, pages) => {
         return lastPage.next ? pages.length + 1 : undefined;
-    }
+    },
+    staleTime: ms('24h'),
   });
 
 export default useGames;
