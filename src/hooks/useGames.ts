@@ -1,6 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { IGameQuery } from "../App";
-import useData from "./useData";
+import useData, { IFetchResponse } from "./useData";
 import { IGenre } from "./useGenres";
+import apiClient from "../services/ApiClient";
 
 export interface IPlatformGames {
   id: number;
@@ -19,22 +21,22 @@ export interface IGame {
   parent_platforms: { platform: IPlatformGames }[];
   metacritic: number;
   genres: IGenre[];
-
 }
 
-const useGames = (
-  gameQuery: IGameQuery
-) =>
-  useData<IGame>(
-    "/games",
-    {
-     params: 
-     { 
-      genres: gameQuery.genre?.id, 
-      platforms: gameQuery.platform?.id,
-      ordering: gameQuery.sortOrder, 
-      search: gameQuery.searchText
-    }},
-    [gameQuery]
-  );
+const useGames = (gameQuery: IGameQuery) =>
+  useQuery<IFetchResponse<IGame>, Error>({
+    queryKey: ["games", gameQuery],
+    queryFn: () =>
+      apiClient
+        .get<IFetchResponse<IGame>>("/games", {
+          params: {
+            genres: gameQuery.genre?.id,
+            parent_platforms: gameQuery.platform?.id,
+            ordering: gameQuery.sortOrder,
+            search: gameQuery.searchText,
+          },
+        })
+        .then((res) => res.data),
+  });
+
 export default useGames;
