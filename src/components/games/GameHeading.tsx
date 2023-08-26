@@ -1,5 +1,8 @@
 import { Heading } from '@chakra-ui/react';
 import { IGameQuery } from '../../App';
+import useGenres from '../../hooks/useGenres';
+import useGenre from '../../hooks/useGenre';
+import usePlatform from '../../hooks/usePlatform';
 
 
 interface GameHeadingProps {
@@ -8,7 +11,11 @@ interface GameHeadingProps {
 
 
 const GameHeading = ({ gameQuery }: GameHeadingProps) => {
-    const heading = `${gameQuery.genre?.name ?? 'All'} Games ${gameQuery.platform?.name ?? ''} ${gameQuery.sortOrder ? `Sorted by ${gameQuery.sortOrder}` : ''}`;
+  const genreId = gameQuery.genreId;
+  const platformId = gameQuery.platformId;
+  const genre = useGenre(genreId);
+  const platform = usePlatform(platformId);
+  const heading = `${genre?.name ?? 'All'} Games ${platform?.name ?? ''} ${gameQuery.sortOrder ? `Sorted by ${gameQuery.sortOrder}` : ''}`;
   return (
     <Heading as="h1" padding="10px">{heading}</Heading>
   )
