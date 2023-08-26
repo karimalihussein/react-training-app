@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { IGameQuery } from "../App";
-import useData, { IFetchResponse } from "./useData";
 import { IGenre } from "./useGenres";
-import apiClient from "../services/ApiClient";
+import apiClient, { IFetchResponse } from "../services/ApiClient";
 
 export interface IPlatformGames {
   id: number;
