@@ -3,7 +3,7 @@ import apiClient from "../services/ApiClient";
 import { Axios, AxiosRequestConfig, CanceledError } from "axios";
 import { AnyArray } from "immer/dist/internal";
 
-interface FetchResponse<T> {
+export interface IFetchResponse<T> {
   count: number;
   results: T[];
 }
@@ -18,7 +18,7 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
     setLoading(true);
     const controller = new AbortController();
     apiClient
-      .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
+      .get<IFetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
       .then((response) => {
         setData(response.data.results);
         setLoading(false);

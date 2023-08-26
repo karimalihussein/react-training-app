@@ -8,17 +8,17 @@ interface GenreListProps {
 }
 
 const GenreList = ({ onSelectGenre, selectedGenre }: GenreListProps) => {
-  const { data, loading, error } = useGenres();
+  const { data, isLoading, error } = useGenres();
   if(error) return null;
-  if (loading) return <Spinner />;
+  if (isLoading) return <Spinner />;
   return (
     <div>
-      {!loading && !error && data.length === 0 && <div>No genres found</div>}
+      {!isLoading && !error && data?.results.length === 0 && <div>No genres found</div>}
       <Heading as="h3" size="md" marginBottom={2}>
         Genres
       </Heading>
       <List>
-        {data.map((genre: IGenre) => (
+        {data?.results.map((genre: IGenre) => (
           <ListItem key={genre.id} paddingY={'5px'}>
             <HStack>
               <Image src={getCroppedImageUrl(genre.image_background, 600, 400)} alt={genre.name} boxSize={'32px'} borderRadius={8}  objectFit={'cover'} />
