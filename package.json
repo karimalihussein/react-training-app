@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "styled-components": "^6.0.7",
     "zod": "^3.20.6"
   },
