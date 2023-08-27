@@ -18,7 +18,7 @@ export interface IGameQuery {
 function App() {
   const [gameQuery, setGameQuery] = useState<IGameQuery>({} as IGameQuery);
   const templateAreas = { base: `"nva" "main"`, lg: `"nva nva" "aside main"`};
-  const templateColumns = { base: "1fr", lg: "300px 1fr"}
+  const templateColumns = { base: "1fr", lg: "300px 1fr"};
   return (
     <Grid templateAreas={templateAreas} templateColumns={templateColumns}>
       <GridItem gridArea="nva"> <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText})} /> </GridItem>

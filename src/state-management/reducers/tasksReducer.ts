@@ -1,4 +1,4 @@
-interface ITask {
+export interface ITask {
     id: number;
     name: string;
 }
@@ -13,9 +13,9 @@ interface IRemoveTaskAction {
     id: number;
 }
 
-type IAction = IAddTaskAction | IRemoveTaskAction;
+export type TaskAction = IAddTaskAction | IRemoveTaskAction;
 
-const tasksReducer = (tasks: ITask[] = [], action: IAction) => {
+const tasksReducer = (tasks: ITask[] = [], action: TaskAction) => {
     switch (action.type) {
         case "ADD":
            return [...tasks, action.task];
