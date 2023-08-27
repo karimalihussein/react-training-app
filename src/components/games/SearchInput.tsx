@@ -1,18 +1,15 @@
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { BsSearch } from 'react-icons/bs';
 import { useRef } from 'react';
+import useGameQueryStore from '../../store';
 
-
-interface SearchInputProps {
-  onSearch: (value: string) => void;
-}
-
-const SearchInput = ({ onSearch }: SearchInputProps) => {
+const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null)
+  const setSearchText = useGameQueryStore(s => s.setSearchText);
   return (
     <form  onSubmit={(event) => {
       event.preventDefault()
-      onSearch(ref.current?.value || '')
+      setSearchText(ref.current?.value || '')
     }}>
         <InputGroup>
           <InputLeftElement pointerEvents="none" children={<BsSearch color="gray.300" />} />
