@@ -1,187 +1,70 @@
-# PlayGround With React JS with Typescript
+# Getting Started with Create React App
 
-# Table of Contents
-0. [Introduction](#Introduction)
-2. [React JS && What Is React JS](#ReactJS)
-3. [How React JS Works](#HowReactJSWorks)
-4. [React JS Features](#ReactJSFeatures)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-    
+## Available Scripts
 
-## 0 - Introduction <a name="Introduction"></a>
+In the project directory, you can run:
 
-- This is a playground for React JS with Typescript, I will be using this repo to learn and test new things with React JS and Typescript, every new thing I learn will be added to this repo.
+### `npm start`
 
-## 1 - React JS <a name="ReactJS"></a>
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- React JS is a JavaScript library for building user interfaces, it is a component based library, it is used to build single page applications, it is used to build reusable UI components, it is used to build interactive UIs, it is used to build complex UIs, it is used to build large scale applications, it is used to build mobile applications, it is used to build desktop applications, it is used to build web applications, it is used to build native applications, it is used to build hybrid applications, it is used to build progressive web applications, it is used to build server side applications, it is used to build
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-Components are independent and reusable bits of code. They serve the same purpose as JavaScript functions, but work in isolation and returns HTML via a render function.
+### `npm test`
 
-- Companies that use React JS:
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```typescript
-const companiesThatUseReactJS: string[] = [
-    "Facebook",
-    "Instagram",
-    "Twitter",
-    "Netflix",
-    "Uber",
-    "PayPal",
-    "Reddit",
-    "Airbnb",
-    "Dropbox",
-    "Pinterest",
-    "Spotify",
-    "Twitch",
-    "Walmart",
-    "BBC",
-    "CNN",
-    "eBay",
-    "Tesla",
-    "Microsoft",
-    "Amazon",
-    "Google",
-    "Apple",
-    "Yahoo",
-    "Asana",
-    "Atlassian",
-    "Cloudflare",
-    "Coinbase",
-    "Coursera",
-    "Dailymotion",
-    "Discord",
-    "Epic Games",
-    "Figma",
-    "GitHub",
-    "GitLab",
-    "Groupon",
-    "HBO",
-    "Heroku",
-    "Hulu",
-    "Imgur",
-    "Intercom",
-    "Khan Academy",
-    "KLM",
-    "Lyft",
-    "Medium",
-    "Netflix",
-    "Notion",
-    "PayPal",
-    "Pinterest",
-    "Reddit",
-    "Salesforce",
-    "Shopify",
-    "Slack",
-    "Spotify",
-    "Stack Overflow",
-    "TikTok",
-    "Twitch",
-    "Twitter",
-    "Uber",
-    "Walmart",
-    "WhatsApp",
-    "Wix",
-    "Yahoo",
-    "Zendesk",
-    "Zoom",
-    "Zomato",
-    "Zulily",
-    "Zynga",
-    "BBC",
-    "CNN",
-    "eBay",
-    "Tesla",
-    "Microsoft",
-    "Amazon",
-    "Google",
-    "Apple",
-    "Yahoo",
-    "Asana",
-    "Atlassian",
-    "Cloudflare",
-    "Coinbase",
-    "Coursera",
-    "Dailymotion",
-    "Discord",
-    "Epic Games",
-    "Figma",
-    "GitHub",
-    "GitLab",
-    "Groupon",
-    "HBO",
-    "Heroku",
-    "Hulu",
-    "Imgur",
-    "Intercom",
-    "Khan Academy",
-    "KLM",
-    "Lyft",
-    "Medium",
-    "Netflix",
-    "Notion",
-    "PayPal",
-    "Pinterest",
-    "Reddit",
-    "Salesforce",
-]
-```
+### `npm run build`
 
-## 2 - How React JS Works <a name="HowReactJSWorks"></a>
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- React.js is a JavaScript library used for building user interfaces in web applications. It was developed by Facebook and is now maintained by Facebook and a community of developers. React follows a component-based architecture, which allows developers to build UI components that can be composed together to create complex user interfaces. Here's an overview of how React works:
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- Component-Based Architecture: React applications are structured around reusable components. Components are building blocks that encapsulate UI elements and their behavior. Each component can have its own state and properties (props), allowing developers to create modular and maintainable UI elements.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- Virtual DOM: One of the key features of React is the use of a Virtual DOM. The Virtual DOM is an abstraction of the actual DOM (Document Object Model). When changes are made to a React component's state, React creates a virtual representation of the updated component. It then compares this virtual representation with the previous one to determine the minimal set of changes needed to update the actual DOM efficiently.
+### `npm run eject`
 
-- Reconciliation: React's Virtual DOM reconciliation process is responsible for efficiently updating the real DOM based on the changes in the virtual representation. It calculates the differences between the previous and current virtual representations and applies only those changes to the actual DOM, minimizing the number of updates required.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-- Declarative Syntax: React uses a declarative syntax, which means you describe what you want to render and how the UI should look based on the current state and props. Developers don't need to manage the low-level DOM manipulation; React takes care of updating the DOM efficiently.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-- One-Way Data Flow: React enforces a one-way data flow. Data flows down from parent components to child components through props. When data changes, it triggers a re-render of the affected components. This helps in maintaining a predictable and traceable data flow.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-- Component Lifecycle: React components have a lifecycle that includes various methods that are called at different stages of the component's existence. Developers can tap into these lifecycle methods to perform tasks such as initialization, rendering, updating, and cleanup.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-- State Management: React allows components to manage their own internal state. State is mutable and can be changed using setState. When the state changes, React triggers a re-render of the component, updating the UI to reflect the new state.
+## Learn More
 
-- Unidirectional Data Flow: React enforces a unidirectional data flow, which means that data always flows in a single direction, from parent to child components. This simplifies debugging and makes it easier to understand how changes in the application's state affect the UI.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- JSX: React uses JSX (JavaScript XML), an extension of JavaScript that allows you to write HTML-like code directly within your JavaScript files. JSX makes it easier to define the structure of UI components and embed dynamic values.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Code Splitting
 
-- Overall, React's approach to building user interfaces focuses on providing a efficient, maintainable, and predictable way to manage UI components and their behavior. It has become a popular choice for web development due to its performance optimizations, component reusability, and strong developer community support.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-## 3 - React JS Features <a name="ReactJSFeatures"></a>
+### Analyzing the Bundle Size
 
-1. Component-Based Architecture
-2. Virtual DOM
-3. Reconciliation
-4. JSX
-5. One-Way Data Flow
-6. Component Lifecycle
-7. State Management
-8. Unidirectional Data Flow
-9. Declarative Syntax
-10. Performance Optimizations
-11. Strong Developer Community Support
-12. Server-Side Rendering
-13. Hooks
-14. Strict Mode
-15. Concurrent Mode
-16. Suspense
-17. Context API
-18. Error Boundaries
-19. Accessibility
-20. Testing Utilities
-21. Developer Tools
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
+### Making a Progressive Web App
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
+### Advanced Configuration
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
+### Deployment
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
+### `npm run build` fails to minify
 
-
-
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
