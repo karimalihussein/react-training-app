@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -8,6 +8,11 @@ function App() {
     "Make dinner",
   ]);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    // This code here... fires when the app.js loads
+    console.log("I re-rendered");
+  }, []);
 
   const addTodo = (e) => {
     // This will fire off when we click the button
